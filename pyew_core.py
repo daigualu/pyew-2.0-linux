@@ -867,7 +867,11 @@ class CPyew:
                 # add customize comment 
                 if not comment :
                     if self.customizeComment.has_key(i.offset):
-                        comment = "\t; %s" % self.customizeComment[i.offset]
+                        if self.customizeComment[i.offset] == '':
+                            comment = ''
+                            del self.customizeComment[i.offset]
+                        else:
+                            comment = "\t; %s" % self.customizeComment[i.offset]
                     
                 if self.case == 'high':
                     #ret += "0x%08x (%02x) %-20s %s%s\n" % (i.offset, i.size, i.instructionHex, str(i.mnemonic) + " " + str(ops), comment)
